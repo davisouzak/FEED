@@ -15,7 +15,15 @@ import { Badge, BadgeContainer } from '@progress/kendo-react-indicators'
 import { SvgIcon } from '@progress/kendo-react-common'
 import { bellIcon, menuIcon } from '@progress/kendo-svg-icons'
 import { GridLayout, GridLayoutItem } from '@progress/kendo-react-layout'
-
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardBody,
+	CardActions,
+	CardImage,
+	CardSubtitle,
+} from '@progress/kendo-react-layout'
 export default function Feed() {
 	const [pokemons, setPokemons] = useState<PokemonListInterface[]>([])
 	const [selectedPokemons, setSelectedPokemons] = useState<
@@ -68,11 +76,24 @@ export default function Feed() {
 
 			<div className='md:container md:mx-auto'>
 				<BadgeContainer className='text-white pt-6'>
-					<GridLayout className='grid gap-4 grid-cols-4 grid-rows-3 items-center justify-center'>
+					<GridLayout className='grid gap-4 grid-cols-4 grid-rows-3'>
 						{pokemons.map((pokemons) => (
 							<>
-								<GridLayoutItem className='flex'>
-									{pokemons.name}
+								<GridLayoutItem className='text-center'>
+									<CardHeader
+										className='k-hbox'
+										style={{ background: '#fff' }}
+									>
+										<div>
+											<CardTitle style={{ marginBottom: '4px' }}>
+												{pokemons.name}
+											</CardTitle>
+											<CardActions>
+												<button onClick={() => setSelectedPokemons(pokemons)}>Lear more</button>
+											</CardActions>
+										</div>
+									</CardHeader>
+									{/* {pokemons.name} */}
 								</GridLayoutItem>
 							</>
 						))}
