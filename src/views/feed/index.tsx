@@ -58,9 +58,12 @@ export default function Feed() {
 				<AppBarSpacer style={{ width: 32 }} />
 			</AppBar>
 
-			<div className='md:container md:mx-auto'>
+			<div className='px-8 w-full'>
 				<BadgeContainer className='text-white pt-6'>
-					<GridLayout className='grid gap-10 gap-x-10 grid-cols-4 grid-rows-3'>
+					<GridLayoutItem
+						className='w-full flex flex-wrap justify-center gap-5'
+	
+					>
 						{pokemons.map((pokemons) => (
 							<>
 								<GridLayoutItem className='text-center'>
@@ -83,7 +86,7 @@ export default function Feed() {
 								</GridLayoutItem>
 							</>
 						))}
-					</GridLayout>
+					</GridLayoutItem>
 				</BadgeContainer>
 			</div>
 		</>
