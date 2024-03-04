@@ -6,9 +6,9 @@ import { Rotas } from './routes'
 export default function App() {
 	return (
 		<>
-		<Router>
-			<Rotas />
-		</Router>
+			<Router>
+				<Rotas />
+			</Router>
 		</>
 	)
 }
