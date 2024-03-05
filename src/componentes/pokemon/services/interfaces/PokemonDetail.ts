@@ -1,6 +1,8 @@
 export interface PokemonDetail {
+    type: any;
     abilities:                Ability[];
     base_experience:          number;
+    color:                    Species[];
     cries:                    Cries;
     forms:                    Species[];
     game_indices:             GameIndex[];
@@ -28,6 +30,7 @@ export interface Ability {
 }
 
 export interface Species {
+    color: string;
     name: string;
     url:  string;
 }

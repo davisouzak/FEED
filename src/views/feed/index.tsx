@@ -25,21 +25,17 @@ import {
 	CardSubtitle,
 } from '@progress/kendo-react-layout'
 import { useNavigate } from 'react-router-dom'
+import { PokedexCard } from './components/PokedexCard'
 
 export default function Feed() {
-	const [pokemons, setPokemons] = useState<PokemonListInterface[]>([])
+	const [pokemons, setPokemons] = useState<PokemonDetail[]>([])
 	const [selectedPokemons, setSelectedPokemons] = useState<
 		PokemonListInterface | undefined
 	>(undefined)
-	const navigate = useNavigate()
 
 	useEffect(() => {
 		listPokemons().then((response) => setPokemons(response.results))
 	}, [])
-
-	function handleClick(pokemon: PokemonListInterface) {
-		navigate(`/pokemon/${pokemon.name}`)
-	}
 
 	return (
 		<>
@@ -60,28 +56,11 @@ export default function Feed() {
 
 			<div className='px-8 w-full'>
 				<BadgeContainer className='text-white pt-6'>
-					<GridLayoutItem
-						className='w-full flex flex-wrap justify-center gap-5'
-	
-					>
+					<GridLayoutItem className='w-full flex flex-wrap justify-center gap-5'>
 						{pokemons.map((pokemons) => (
 							<>
 								<GridLayoutItem className='text-center'>
-									<CardHeader
-										className='k-hbox'
-										style={{ background: '#fff' }}
-									>
-										<div>
-											<CardTitle style={{ marginBottom: '4px' }}>
-												{pokemons.name}
-											</CardTitle>
-											<CardActions>
-												<button onClick={() => handleClick(pokemons)}>
-													Lear more
-												</button>
-											</CardActions>
-										</div>
-									</CardHeader>
+									<PokedexCard pokemon={pokemons} />
 									{/* {pokemons.name} */}
 								</GridLayoutItem>
 							</>
