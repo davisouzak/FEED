@@ -19,9 +19,8 @@ Este é um projeto de uma Pokedex, uma aplicação web onde os usuários podem v
 
 1. Clone o repositório para sua máquina local.
 2. Instale as dependências do frontend e backend utilizando `npm install`.
-3. Inicie o servidor backend utilizando `npm start` na pasta do backend.
-4. Inicie o servidor frontend utilizando `npm start` na pasta do frontend.
-5. Acesse a aplicação no navegador através do endereço `http://localhost:3000`.
+3. Inicie o projeto utilizando `npm start`.
+4. Acesse a aplicação no navegador através do endereço `http://localhost:3000`.
 
 ## Contribuições
 
