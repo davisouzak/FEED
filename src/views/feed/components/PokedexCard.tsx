@@ -1,20 +1,13 @@
 import React, { useContext } from 'react'
-import { PokemonListInterface } from '../../../componentes/pokemon/services/listPokemons'
 import { useNavigate } from 'react-router-dom'
 import {
 	Card,
-	CardHeader,
 	CardTitle,
-	CardBody,
 	CardActions,
 	CardImage,
-	CardSubtitle,
-	Avatar,
 } from '@progress/kendo-react-layout'
 
 import { PokemonDetail } from '../../../componentes/pokemon/services/interfaces/PokemonDetail'
-import { ChipList, Chip, ChipProps } from '@progress/kendo-react-buttons'
-import { type } from 'os'
 import { SvgIcon } from '@progress/kendo-react-common'
 import { heartIcon } from '@progress/kendo-svg-icons'
 import { FavoriteContext } from '../../../favorites/contexts/FavoriteContext'
@@ -38,10 +31,6 @@ export const PokedexCard: React.FC<PokedexCardProps> = ({ pokemon }) => {
 		setFavorites(favorites.filter((poke) => poke.name !== poke.name))
 	}
 
-	const isFavorite = favorites.some((poke) => poke.name === pokemon.name)
-
-
-
 	return (
 		<Card
 			onClick={handleClick}
@@ -49,9 +38,6 @@ export const PokedexCard: React.FC<PokedexCardProps> = ({ pokemon }) => {
 		>
 			<CardTitle>{pokemon.name}</CardTitle>
 			<CardImage src={pokemon.sprites.front_default} />
-			{/* <CardSubtitle>
-                {pokemon.types.map((type) => <Chip label={type.type.name} {...type.type} disabled={props.dataItem.disabled} />)}  
-            </CardSubtitle> */}
 			<CardActions 
 			style={{ display: 'flex', justifyContent: 'center' }}>
 				<button 

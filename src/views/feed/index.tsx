@@ -1,39 +1,21 @@
-import { useContext, useEffect, useState } from 'react'
-import {
-	PokemonListInterface,
-	listPokemons,
-} from '../../componentes/pokemon/services/listPokemons'
-import { getPokemonsDetails } from '../../componentes/pokemon/services/getPokemonsDetails'
-import { PokemonDetail } from '../../componentes/pokemon/services/interfaces/PokemonDetail'
+import { listPokemons } from '../../componentes/pokemon/services/listPokemons'
 import {
 	AppBar,
 	AppBarSection,
 	AppBarSpacer,
-	Avatar,
 } from '@progress/kendo-react-layout'
-import { Badge, BadgeContainer } from '@progress/kendo-react-indicators'
+import { BadgeContainer } from '@progress/kendo-react-indicators'
 import { SvgIcon } from '@progress/kendo-react-common'
-import { bellIcon, heartIcon, menuIcon } from '@progress/kendo-svg-icons'
-import { GridLayout, GridLayoutItem } from '@progress/kendo-react-layout'
+import { heartIcon, menuIcon } from '@progress/kendo-svg-icons'
+import { GridLayoutItem } from '@progress/kendo-react-layout'
 import { PokedexCard } from './components/PokedexCard'
-import { Query, infiniteQueryOptions, useQuery } from '@tanstack/react-query'
-import { useInfiniteQuery } from '@tanstack/react-query'
-import PokemonDetails from '../../componentes/pokemon/services/PokemonDetails'
-import { queries } from '@testing-library/react'
-import { Loader, LoaderType } from '@progress/kendo-react-indicators'
-import { Button } from '@progress/kendo-react-buttons'
+import { useQuery } from '@tanstack/react-query'
+import { Loader } from '@progress/kendo-react-indicators'
 import { useNavigate } from 'react-router-dom'
-import { FavoriteContext } from '../../favorites/contexts/FavoriteContext'
-
-interface PokedexProps {}
 
 export default function Feed() {
-	const [selectedPokemons, setSelectedPokemons] = useState<
-		PokemonListInterface | undefined
-	>(undefined)
 	const navegar = useNavigate()
-	const { favorites } = useContext(FavoriteContext)
-	const { data, isLoading, refetch, isStale } = useQuery({
+	const { data, isLoading } = useQuery({
 		queryKey: ['listPokemons'],
 		queryFn: listPokemons,
 	})

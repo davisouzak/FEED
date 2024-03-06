@@ -4,16 +4,13 @@ import {
 	AppBar,
 	AppBarSection,
 	AppBarSpacer,
-	Avatar,
 } from '@progress/kendo-react-layout'
-import { Badge, BadgeContainer } from '@progress/kendo-react-indicators'
-import { bellIcon, menuIcon } from '@progress/kendo-svg-icons'
+import {  BadgeContainer } from '@progress/kendo-react-indicators'
+import {  menuIcon } from '@progress/kendo-svg-icons'
 import { SvgIcon } from '@progress/kendo-react-common'
-import { GridLayout, GridLayoutItem } from '@progress/kendo-react-layout'
+import {  GridLayoutItem } from '@progress/kendo-react-layout'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getPokemonsDetails } from './getPokemonsDetails'
-import { type } from 'os'
-import { types } from 'util'
 
 interface PokemonDetailsProps {}
 

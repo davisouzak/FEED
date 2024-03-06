@@ -6,7 +6,6 @@ import { PokedexCard } from "../views/feed/components/PokedexCard"
 import { FavoriteContext } from "./contexts/FavoriteContext"
 
 
-interface PokedexProps {}
 
 export default function Feed() {
 	const [selectedPokemons, setSelectedPokemons] = useState<
