@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {
 	PokemonListInterface,
 	listPokemons,
@@ -13,7 +13,7 @@ import {
 } from '@progress/kendo-react-layout'
 import { Badge, BadgeContainer } from '@progress/kendo-react-indicators'
 import { SvgIcon } from '@progress/kendo-react-common'
-import { bellIcon, menuIcon } from '@progress/kendo-svg-icons'
+import { bellIcon, heartIcon, menuIcon } from '@progress/kendo-svg-icons'
 import { GridLayout, GridLayoutItem } from '@progress/kendo-react-layout'
 import { PokedexCard } from './components/PokedexCard'
 import { Query, infiniteQueryOptions, useQuery } from '@tanstack/react-query'
@@ -22,12 +22,17 @@ import PokemonDetails from '../../componentes/pokemon/services/PokemonDetails'
 import { queries } from '@testing-library/react'
 import { Loader, LoaderType } from '@progress/kendo-react-indicators'
 import { Button } from '@progress/kendo-react-buttons'
+import { useNavigate } from 'react-router-dom'
+import { FavoriteContext } from '../../favorites/contexts/FavoriteContext'
+
+interface PokedexProps {}
 
 export default function Feed() {
 	const [selectedPokemons, setSelectedPokemons] = useState<
 		PokemonListInterface | undefined
 	>(undefined)
-
+	const navegar = useNavigate()
+	const { favorites } = useContext(FavoriteContext)
 	const { data, isLoading, refetch, isStale } = useQuery({
 		queryKey: ['listPokemons'],
 		queryFn: listPokemons,
@@ -37,6 +42,21 @@ export default function Feed() {
 		<>
 			<AppBar className='bg-gray-800 h-20 mx-auto max-w-7x1 px-2 sm:px-6 lg:px-8'>
 				<AppBarSpacer style={{ width: 4 }} />
+
+				<AppBarSection>
+					<button className=' k-button k-button-md k-rounded-md k-button-flat k-button-flat-base'>
+						<SvgIcon icon={menuIcon} />
+					</button>
+
+					<button className=' flex justify-end grow k-button k-button-md k-rounded-md k-button-flat k-button-flat-base'>
+						<SvgIcon
+							onClick={() => navegar('/favoritos')}
+							className='flex justify-end grow'
+							icon={heartIcon}
+						/>
+					</button>
+				</AppBarSection>
+
 				<AppBarSection>
 					<h1 className='title text-3xl animate-pulse'>Pokedex</h1>
 				</AppBarSection>
@@ -46,7 +66,6 @@ export default function Feed() {
 
 			<div className='px-8 w-full'>
 				<BadgeContainer className='text-white pt-6'>
-					<Button id='refetch'>Refetch</Button>
 					{!isLoading ? (
 						<>
 							<GridLayoutItem className='w-full flex flex-wrap justify-center gap-5'>
