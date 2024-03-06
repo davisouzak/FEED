@@ -10,7 +10,7 @@ import { Badge, BadgeContainer } from '@progress/kendo-react-indicators'
 import { bellIcon, menuIcon } from '@progress/kendo-svg-icons'
 import { SvgIcon } from '@progress/kendo-react-common'
 import { GridLayout, GridLayoutItem } from '@progress/kendo-react-layout'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getPokemonsDetails } from './getPokemonsDetails'
 import { type } from 'os'
 import { types } from 'util'
@@ -61,10 +61,12 @@ function getPokemonTypeIcon(type: string) {
 }
 
 export const PokemonDetails: React.FC<PokemonDetailsProps> = () => {
+	const navigate = useNavigate()
 	const { name } = useParams()
 	const [selectedPokemonsDetails, setSelectedPokemonsDetails] = useState<
 		PokemonDetail | undefined
 	>(undefined)
+
 	useEffect(() => {
 		if (!name) return
 		getPokemonsDetails(name).then((response) =>
@@ -84,6 +86,12 @@ export const PokemonDetails: React.FC<PokemonDetailsProps> = () => {
 				<AppBarSpacer style={{ width: 4 }} />
 
 				<AppBarSection>
+					<button
+						className='title text-3xl pr-2'
+						onClick={() => navigate(-1)}
+					>
+						Home
+					</button>
 					<h1 className='title text-3xl animate-pulse'>{name}</h1>
 				</AppBarSection>
 
@@ -100,50 +108,43 @@ export const PokemonDetails: React.FC<PokemonDetailsProps> = () => {
 							src={selectedPokemonsDetails?.sprites.front_default}
 							alt=''
 						/>
-						{/* <h2 className='text-white'>
-                            Pokemon selecionado:{' '}
-                            {selectedPokemons?.name
-                                ? selectedPokemons.name
-                                : 'Nenhum pokemon selecionado'}
-                        </h2> */}
-						{/* {JSON.stringify(
-							selectedPokemonsDetails?.sprites.front_default,
-							undefined,
-							2
-						)} */}
 					</GridLayoutItem>
 
 					<GridLayoutItem>{selectedPokemonsDetails?.name}</GridLayoutItem>
-					{selectedPokemonsDetails?.types.map((type) => (
-						
+
+					<>
+						<GridLayoutItem className='flex flex-row'>
+							<GridLayoutItem>Specie:</GridLayoutItem>
+							<GridLayoutItem>
+								{selectedPokemonsDetails?.species.name}
+							</GridLayoutItem>
+						</GridLayoutItem>
+
 						<>
 							<GridLayoutItem className='flex flex-row'>
-								<GridLayoutItem>Specie:</GridLayoutItem>
+								<GridLayoutItem>Type:</GridLayoutItem>
 								<GridLayoutItem>
-									{selectedPokemonsDetails?.species.name}
+									{selectedPokemonsDetails?.types.map((type) => (
+										<>
+											{getPokemonTypeIcon(type.type.name)}
+											{type.type.name}
+										</>
+									))}
 								</GridLayoutItem>
 							</GridLayoutItem>
 
-							<>
+							<GridLayoutItem className='flex flex-row'>
+								<GridLayoutItem>Abilities:</GridLayoutItem>
 								<GridLayoutItem className='flex flex-row'>
-									<GridLayoutItem>Type:</GridLayoutItem>
-									<GridLayoutItem>
-										{getPokemonTypeIcon(type.type.name)}
-										{type.type.name}
-									</GridLayoutItem>
+									{selectedPokemonsDetails?.abilities.map((ability) => (
+										<GridLayoutItem className='mr-2'>
+											{ability.ability.name}
+										</GridLayoutItem>
+									))}
 								</GridLayoutItem>
-
-								<GridLayoutItem className='flex flex-row'>
-									<GridLayoutItem>Abilities:</GridLayoutItem>
-									<GridLayoutItem className='flex flex-row'>
-										{selectedPokemonsDetails?.abilities.map((ability) => (
-											<GridLayoutItem>{ability.ability.name}</GridLayoutItem>
-										))}
-									</GridLayoutItem>
-								</GridLayoutItem>
-							</>
+							</GridLayoutItem>
 						</>
-					))}
+					</>
 				</BadgeContainer>
 			</div>
 		</div>
