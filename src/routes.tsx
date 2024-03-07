@@ -1,7 +1,5 @@
 import React from 'react'
-import * as ReactDOM from 'react-dom/client'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import App from './App'
+import { BrowserRouter as  Routes, Route } from 'react-router-dom'
 import Feed from './views/feed'
 import { PokemonDetails } from './componentes/pokemon/services/PokemonDetails'
 import FavoriteScreen from './favorites/FavoriteScreen'
